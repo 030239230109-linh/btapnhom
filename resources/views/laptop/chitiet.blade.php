@@ -3,17 +3,21 @@
         Chi tiết sản phẩm
     </x-slot>
 
-    <div id="alert-success" 
-        style="display:none; background:#d4edda; color:#155724; border:1px solid #c3e6cb; 
+    <div style="margin-bottom: 15px;">
+        <a href="{{ route('cart.page') }}" class="btn btn-primary btn-sm">Xem giỏ hàng</a>
+    </div>
+    
+    <div id="alert-success"
+        style="display:none; background:#d4edda; color:#155724; border:1px solid #c3e6cb;
                padding:12px 20px; border-radius:6px; margin: 15px 0;">
         Đã thêm vào giỏ hàng!
     </div>
-    
+
     <div class="mt-4">
         <div class="laptop-info">
 
             <div class="text-center p-2">
-                <img src="{{ asset('storage/image/' . $data->hinh_anh) }}" 
+                <img src="{{ asset('storage/image/' . $data->hinh_anh) }}"
                      style="width: 100%; max-height: 350px; object-fit: contain;"
                      alt="{{ $data->tieu_de }}">
             </div>
@@ -29,9 +33,11 @@
                     <p>Nhu cầu: {{ $data->nhu_cau }}</p>
                     <p>Màn hình: {{ $data->man_hinh }}</p>
                     <p>Hệ điều hành: {{ $data->he_dieu_hanh }}</p>
-                    <p>Giá: <span style="color: red; font-weight: bold; font-style: italic;">
-                        {{ number_format($data->gia, 0, ',', '.') }} VNĐ
-                    </span></p>
+                    <p>Giá:
+                        <span style="color: red; font-weight: bold; font-style: italic;">
+                            {{ number_format($data->gia, 0, ',', '.') }} VNĐ
+                        </span>
+                    </p>
                 </div>
 
                 <form id="form-add-cart" style="margin-top: 15px;">
@@ -60,41 +66,43 @@
                     <p>Bàn phím: {{ $data->ban_phim }}</p>
                     <p>Cổng kết nối: {{ $data->cong_ket_noi }}</p>
                 </div>
-
-                <script>
-                let alertTimeout;
-
-                document.getElementById('form-add-cart').addEventListener('submit', function(e) {
-                    e.preventDefault();
-
-                    const formData = new FormData(this);
-
-                    fetch("{{ route('cart.add') }}", {
-                        method: 'POST',
-                        headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-                        body: formData
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success) {
-                            // Hiện thông báo
-                            const alert = document.getElementById('alert-success');
-                            alert.style.display = 'block';
-
-                            // Cập nhật số lượng icon giỏ hàng (nếu có)
-                            const badge = document.getElementById('cart-number-product');
-                            if (badge) badge.textContent = data.total_quantity;
-
-                            // Tự ẩn sau 2 giây, reset nếu nhấn liên tục
-                            clearTimeout(alertTimeout);
-                            alertTimeout = setTimeout(() => {
-                                alert.style.display = 'none';
-                            }, 2000);
-                        }
-                    });
-                });
-                </script>
             </div>
         </div>
     </div>
+
+    <script>
+        let alertTimeout;
+
+        document.getElementById('form-add-cart').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch("{{ route('cart.add') }}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json'
+                },
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    const alertBox = document.getElementById('alert-success');
+                    alertBox.style.display = 'block';
+
+                    const badge = document.getElementById('cart-number-product');
+                    if (badge) {
+                        badge.textContent = data.total_quantity;
+                    }
+
+                    clearTimeout(alertTimeout);
+                    alertTimeout = setTimeout(() => {
+                        alertBox.style.display = 'none';
+                    }, 2000);
+                }
+            });
+        });
+    </script>
 </x-laptop-layout>
