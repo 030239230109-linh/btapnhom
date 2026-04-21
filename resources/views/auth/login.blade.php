@@ -1,9 +1,4 @@
 <x-guest-layout>
-    <x-slot name="logo">
-        <a href="/">
-            <img src="{{ asset('images/logo.png') }}" class="w-20 h-20 fill-current text-gray-500" alt="Logo Laptop">
-        </a>
-    </x-slot>
 
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

@@ -1,4 +1,4 @@
-<x-laptop-layout title="Laptop Store" :categories="$categories">
+<x-laptop-layout title="Laptop Store">
 
     <!-- SORT -->
     <a href="?sort=asc">Giá tăng dần</a>

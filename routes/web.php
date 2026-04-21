@@ -17,6 +17,9 @@ use App\Http\Controllers\LaptopController7;
 //Câu 5: Tìm kiếm laptop
 Route::post('timkiem', [HomeController5::class, 'search'])->name('laptop.search');
 
+
+Route::get('/', [HomeController2::class, 'laptop']);
+Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::get('/home', [LaptopController7::class, 'index'])->name('home');
 
 // lọc theo hãng
