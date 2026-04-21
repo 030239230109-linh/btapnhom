@@ -3,7 +3,7 @@
         Laptop
     </x-slot>
 
-    <div style="margin:10px 0; display:flex; justify-content:space-between; align-items:center;">
+    <div style="margin:10px 0; display:flex; justify-content:center; align-items:center;">
         <div style="display:flex; gap:8px; align-items:center;">
             <span style="color:black; font-weight:bold;">Tìm kiếm theo</span>
             <a href="{{ url('laptop/loc?sapxep=gia-tang-dan') }}">
@@ -14,9 +14,6 @@
             </a>
         </div>
 
-        <a href="{{ route('cart.page') }}" class="btn btn-primary btn-sm">
-            Giỏ hàng
-        </a>
     </div>
 
     <div class="list-laptop">

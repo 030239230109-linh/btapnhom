@@ -2,10 +2,6 @@
     <x-slot name="title">
         Chi tiết sản phẩm
     </x-slot>
-
-    <div style="margin-bottom: 15px;">
-        <a href="{{ route('cart.page') }}" class="btn btn-primary btn-sm">Xem giỏ hàng</a>
-    </div>
     
     <div id="alert-success"
         style="display:none; background:#d4edda; color:#155724; border:1px solid #c3e6cb;

@@ -15,12 +15,11 @@ class HomeController extends Controller
 
         return view('home', compact('laptops', 'categories'));
     }
-}
-class HomeController extends Controller
-{
-    //
-    public function index(){
-        return view("laptop.index");
+
+    public function index()
+    {
+        $laptops = Laptop::all();
+
+        return view('laptop.index', compact('laptops'));
     }
 }
-
